@@ -14,7 +14,7 @@ This script allows you to disable or enable Windows Defender along with its serv
 
 **Usage:** Simply extract the `.zip` file into a folder and double click on the 'DisableDefend.cmd' file.
 
-![cmd_jPwkXdXPfE](https://user-images.githubusercontent.com/65787561/171380392-d09aae8b-cd9b-41ae-9297-d6c4c7fdf99e.png)
+![cmd_MAK6ouCNKv](https://user-images.githubusercontent.com/65787561/171391681-3992b9be-dcdc-4a67-9947-5e3bea1670d0.png)
 
 ## Warnings ⚠️
 - **You need tamper protection disabled before running this script!** ⬅️

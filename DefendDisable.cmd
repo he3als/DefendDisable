@@ -1,7 +1,7 @@
 @echo off
 set version=v1.0
 chcp 65001 >nul 2>&1
-title DefendDisable %version% - he3als
+title DefendDisable %version% - @he3als
 color 0c
 
 :elevation_check
@@ -40,27 +40,27 @@ pause
 exit /b
 
 :main
-mode con:cols=47 lines=21
+mode con:cols=53 lines=21
 cls
-echo  ╔═══════════════════════════════════════════╗
-echo  ║ Toggling Windows Defender                 ║
-echo  ╠═══════════════════════════════════════════╣
-echo  ║ This script allows you to disable or      ║
-echo  ║ enable Windows Defender and its services. ║
-echo  ║ Only use this if you really know what you ║
-echo  ║ are doing, security will be worsened.     ║
-echo  ║ SmartScreen is also disabled.             ║
-echo  ╟───────────────────────────────────────────╢
-echo  ║ I am not responsible for any damage that  ║
-echo  ║ is caused from using this script!         ║
-echo  ╟───────────────────────────────────────────╢
-echo  ║ You need to disable tamper protection     ║
-echo  ║ before using this script!                 ║
-echo  ╟───────────────────────────────────────────╢
-echo  ║ 1) Disable Defender                       ║
-echo  ║ 2) Enable Defender                        ║
-echo  ║ 3) Exit                                   ║
-echo  ╚═══════════════════════════════════════════╝
+echo  ╔═════════════════════════════════════════════════╗
+echo  ║ Toggling Windows Defender                       ║
+echo  ╠═════════════════════════════════════════════════╣
+echo  ║ This script allows you to disable or enable     ║
+echo  ║ Windows Defender with its services and drivers. ║
+echo  ║ Only use this if you really know what you are   ║
+echo  ║ doing, security will be worsened. SmartScreen   ║
+echo  ║ is also disabled. Created by @he3als on GitHub. ║
+echo  ╟─────────────────────────────────────────────────╢
+echo  ║ I am not responsible for any damage that is     ║
+echo  ║ caused from using this script!                  ║
+echo  ╟─────────────────────────────────────────────────╢
+echo  ║ You need to disable tamper protection before    ║
+echo  ║ using this script!                              ║
+echo  ╟─────────────────────────────────────────────────╢
+echo  ║ 1) Disable Defender                             ║
+echo  ║ 2) Enable Defender                              ║
+echo  ║ 3) Exit                                         ║
+echo  ╚═════════════════════════════════════════════════╝
 :: Fix for choice not respecting spaces/padding at the start of the message
 :: Credit to Mathieu in the batch Discord (server.bat)
 pushd "%~dp0"
