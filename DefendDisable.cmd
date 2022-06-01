@@ -304,6 +304,5 @@ exit /b
 echo]
 echo You need to update Windows.
 pause
-cd /d "C:\Windows\ImmersiveControlPanel"
-start SystemSettings.exe
+start ms-settings:windowsupdate
 exit /b
