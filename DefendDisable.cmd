@@ -188,7 +188,6 @@ echo]
 echo Just to make sure...
 CHOICE /N /M "DO YOU HAVE TAMPER PROTECTION ENABLED? [Y/N]"
 if %errorlevel%==1 goto tamper
-if %errorlevel%==2 goto disable
 echo]
 :: Just in case any updates could revert the changes done by the script
 echo Just to make sure...
