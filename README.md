@@ -1,6 +1,6 @@
 # Defend Disable ✖️
 
-This script allows you to disable or enable Windows Defender along with its services and drivers. You might want to disable Defender for performance reasons and generally just to have a lighter system, as you don't need the services & drivers running without Defender enabled. 
+This script allows you to disable or enable Windows Defender along with its services and drivers. You might want to disable Defender for performance reasons and to generally have a lighter system, as you don't need the services & drivers running without Defender enabled. 
 
 **Only use this if you really know what you are doing, security will be worsened.** ❗
 
