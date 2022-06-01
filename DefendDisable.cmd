@@ -44,7 +44,7 @@ exit /b
 
 :defender_check
 :: Check if the WinDefend service exists, if not then I automatically assume that you are using a custom ISO and that you have stripped Defender
-sc query WinDefend1 | find /i "does not exist as an installed service" >nul 2>&1
+sc query WinDefend | find /i "does not exist as an installed service" >nul 2>&1
 if %errorlevel%==0 (
 	echo WinDefend service is not present, you are most likely using a custom Windows ISO with stripped Defender.
 	echo You can not continue, this script does not have the ability to reinstall and reintegrate Defender into Windows.
