@@ -5,7 +5,7 @@ This script allows you to disable or enable Windows Defender along with its serv
 **Only use this if you really know what you are doing, security will be worsened.** ❗
 
 ## Features 🤔
-- Disables or enables Windows Defender along with its services and drivers, unlike if you disabled protection via the Security app. 
+- Disables or enables Windows Defender along with its services and drivers, unlike if you only disabled protection via the Security app. 
 - Services like Antimalware Service Executable will not be running in the background taking up resources. 
 - SmartScreen is also disabled.
 
