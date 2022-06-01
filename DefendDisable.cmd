@@ -1,16 +1,19 @@
 @echo off
-set version=v1.0
+set version=v1.1
+:: Use UTF-8 encoding
 chcp 65001 >nul 2>&1
 title DefendDisable %version% - @he3als
 color 0c
 
 :elevation_check
+:: Checks if a user is system or not
 whoami /user | find /i "S-1-5-18" >nul 2>&1
 if %errorlevel%==0 (
-	goto main
+	goto defender_check
 ) else (goto nsudo_dir)
 
 :nsudo_dir
+:: Get correct NSudo version
 set ArchDir=Win32
 if %PROCESSOR_ARCHITECTURE%==AMD64 set ArchDir=x64
 if %PROCESSOR_ARCHITECTURE%==ARM set ArchDir=ARM
@@ -19,16 +22,16 @@ cd "%~dp0%ArchDir%" >nul 2>&1
 if exist NSudoLG.exe (
 	nsudolg.exe -U:T -P:E "%~dpnx0" && exit
 	goto nsudo_path_check
-) else (goto nsudo_path_check)
+) else (goto nsudo_path)
 
-:nsudo_path_check
+:nsudo_path
+:: Some people have NSudo in PATH as nsudo.exe and nsudolg.exe, this detects both
 where /q nsudo.exe >nul 2>&1
-if %ERRORLEVEL%==0 (set nsudoexe=nsudo.exe && goto nsudo_path_elevation)
+if %ERRORLEVEL%==0 (set nsudoexe=nsudo.exe)
 where /q nsudolg.exe >nul 2>&1
-if %ERRORLEVEL%==0 (set nsudoexe=nsudolg.exe && goto nsudo_path_elevation) else (goto nsudo_fail)
-
-:nsudo_path_elevation
+if %ERRORLEVEL%==0 (set nsudoexe=nsudolg.exe) else (goto nsudo_fail)
 %nsudoexe% -U:T -P:E "%~dpnx0" && exit
+:: Something must of went wrong if the script did not exit
 echo Something went wrong with self-elevation!
 pause
 
@@ -38,6 +41,17 @@ echo Make sure that NSudoLG is in the script directory or in PATH.
 echo Alternatively, get PowerRun and drag the script into the exe and accept the UAC prompt.
 pause
 exit /b
+
+:defender_check
+:: Check if the WinDefend service exists, if not then I automatically assume that you are using a custom ISO and that you have stripped Defender
+sc query WinDefend1 | find /i "does not exist as an installed service" >nul 2>&1
+if %errorlevel%==0 (
+	echo WinDefend service is not present, you are most likely using a custom Windows ISO with stripped Defender.
+	echo You can not continue, this script does not have the ability to reinstall and reintegrate Defender into Windows.
+	pause
+	exit /b
+) else (goto main)
+
 
 :main
 mode con:cols=53 lines=21
@@ -61,8 +75,8 @@ echo  ║ 1) Disable Defender                             ║
 echo  ║ 2) Enable Defender                              ║
 echo  ║ 3) Exit                                         ║
 echo  ╚═════════════════════════════════════════════════╝
-:: Fix for choice not respecting spaces/padding at the start of the message
-:: Credit to Mathieu in the batch Discord (server.bat)
+:: Fix for choice not respecting spaces/padding at the start of the CHOICE.exe message
+:: Credit to Mathieu#4291 in the server.bat Discord server
 pushd "%~dp0"
 for /f %%A in ('forfiles /m "%~nx0" /c "cmd /c echo(0x08"') do (
     set "\B=%%A"
@@ -76,6 +90,7 @@ goto menu
 
 :enable_confirm
 cls
+:: Maximise the window
 powershell -NonInteractive -NoProfile -window maximized -command ""
 echo This will enable Defender, improving security but also reducing performance and causing more annoyances.
 echo I highly recommend to configure the Windows Security app after restarting.
@@ -160,6 +175,7 @@ exit /b
 
 :disable_confirm
 cls
+:: Maximise window
 powershell -NonInteractive -NoProfile -window maximized -command ""
 echo WARNING: Security of your computer will be worsened and there could be potential issues with updating Windows. I am not responsible for any damage as you have been warned!
 echo Your computer will be restarted once after Defender is disabled, so please save everything you need to save!
@@ -168,13 +184,17 @@ echo SmartScreen and some other features will also be disabled, edit the script 
 timeout /t 10 /nobreak
 pause
 echo]
+:: Tamper protection will certainly prevent the script from doing any major changes, it needs to be disabled
 echo Just to make sure...
 CHOICE /N /M "DO YOU HAVE TAMPER PROTECTION ENABLED? [Y/N]"
 if %errorlevel%==1 goto tamper
 if %errorlevel%==2 goto disable
 echo]
+:: Just in case any updates could revert the changes done by the script
 echo Just to make sure...
 CHOICE /N /M "DO YOU HAVE ANY PENDING WINDOWS UPDATES? [Y/N]"
+if %errorlevel%==1 goto update
+if %errorlevel%==2 goto disable
 goto disable
 
 :disable
@@ -251,6 +271,9 @@ if %ERRORLEVEL%==0 (
 )
 echo]
 echo Renaming Windows Defender folders to prevent it from enabling it self...
+:: Aetopia said that this fixed Defender from re-enabling it self, he also said that it works fine with updates
+:: Doesn't seem to negatively effect anything
+:: Most likely will fail here, you need to re-run the script again after a restart
 if not exist "C:\ProgramData\Microsoft\Windows Defender\Platform1" (
 	cd /d "C:\ProgramData\Microsoft\Windows Defender" > nul
 	ren "Platform" "Platform1" > nul
@@ -276,4 +299,12 @@ pause
 cd /d C:\Program Files\WindowsApps\
 cd Microsoft.SecHealthUI_*\
 start SecHealthUI.exe
+exit /b
+
+:update
+echo]
+echo You need to update Windows.
+pause
+cd /d "C:\Windows\ImmersiveControlPanel"
+start SystemSettings.exe
 exit /b
