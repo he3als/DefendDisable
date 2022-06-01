@@ -1,0 +1,2 @@
+SHA-256: BDD9286EAEFC70E313748693A0372EAA18DE535FFEBFAE0EF658F88F53073E6F
+Source: https://github.com/M2Team/NSudo/releases/download/9.0-Preview1/NSudo_9.0_Preview1_9.0.2676.0.zip
