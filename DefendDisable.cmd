@@ -138,21 +138,22 @@ schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Cleanu
 schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Verification" /Enable > nul
 echo]
 echo Enabling context menu to scan files, folders and drives...
-reg query "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==1 (
-	reg copy "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
-	reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
-)
-reg query "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==1 (
-	reg copy "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
-	reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
-)
-reg query "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==1 (
-	reg copy "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
-	reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
-)
+:: reg query "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==1 (
+	:: reg copy "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
+	:: reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
+:: )
+:: reg query "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==1 (
+	:: reg copy "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
+	:: reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
+:: )
+:: reg query "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==1 (
+	:: reg copy "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" > nul
+	:: reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled" /f >nul 2>&1
+:: )
+reg delete "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /f
 echo]
 echo Renaming Windows Defender folders back to default...
 if not exist "C:\ProgramData\Microsoft\Windows Defender\Platform" (
@@ -253,21 +254,23 @@ schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Cleanu
 schtasks /Change /TN "Microsoft\Windows\Windows Defender\Windows Defender Verification" /Disable > nul
 echo]
 echo Disabling context menu to scan files, folders and drives...
-reg query "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==0 (
-	reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
-	reg copy "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
-)
-reg query "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==0 (
-	reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
-	reg copy "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
-)
-reg query "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
-if %ERRORLEVEL%==0 (
-	reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
-	reg copy "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
-)
+:: reg query "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==0 (
+	:: reg delete "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
+	:: reg copy "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
+:: )
+:: reg query "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==0 (
+	:: reg delete "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
+	:: reg copy "HKLM\SOFTWARE\Classes\Drive\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
+:: )
+:: reg query "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" | find /i "ERROR" >nul 2>&1
+:: if %ERRORLEVEL%==0 (
+	:: reg delete "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\DefenderDisabled\EPP" /f >nul 2>&1
+	:: reg copy "HKLM\SOFTWARE\Classes\Directory\shellex\ContextMenuHandlers\EPP" "HKLM\SOFTWARE\Classes\*\shellex\ContextMenuHandlers\DefenderDisabled\EPP" > nul
+:: )
+:: Blocks the shell extension's CLSID - More reliable and way cleaner than the method above
+reg add "HKLM\SOFTWARE\Microsoft\Windows\CurrentVersion\Shell Extensions\Blocked" /v "{09A47860-11B0-4DA5-AFA5-26D86198A780}" /t REG_SZ /f > nul
 echo]
 echo Renaming Windows Defender folders to prevent it from enabling it self...
 :: Aetopia said that this fixed Defender from re-enabling it self, he also said that it works fine with updates
