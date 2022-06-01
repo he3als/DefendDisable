@@ -1,5 +1,5 @@
 # Defend Disable ✖️
-A batch script to disable Windows Defender. This script allows you to disable or enable Windows Defender along with its services and drivers. **Only use this if you really know what you are doing, security will be worsened.** SmartScreen is also disabled. This disables the actual Windows Defender drivers and services, so services like Antimalware Service Executable are not even running in the background taking up resources, unlike if you disabled it through the Security app.
+A batch script to disable Windows Defender. This script allows you to disable or enable Windows Defender along with its services and drivers, unlike if you disabled protection via the Security app. That means that services like Antimalware Service Executable will not be running in the background taking up resources. **Only use this if you really know what you are doing, security will be worsened.** SmartScreen is also disabled.
 **You won't be able to enable Defender on systems with Defender stripped/removed.**
 
 **You need tamper protection disabled before running this script!** ⬅️
