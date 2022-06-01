@@ -18,7 +18,7 @@ This script allows you to disable or enable Windows Defender along with its serv
 
 ## Warnings ⚠️
 - **You need tamper protection disabled before running this script!** ⬅️
-- **You won't be able to enable Defender on systems with Defender stripped/removed**
+- **You won't be able to enable Defender on systems with Defender stripped/removed, you can only revert disabling Defender with this script**
 - Disabling Windows Defender will leave your computer open to malicious software, I am not responsible for any damage caused from disabling Defender
 - Even though I use this script personally and I can see no issues with it, there could be issues with Windows Update and other services
 - This is unofficial
