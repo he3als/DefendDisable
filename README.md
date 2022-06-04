@@ -1,5 +1,5 @@
 # Defend Disable ✖️
-Just use https://privacy.sexy/, it is better and I did not realise it had an option to disable Defender before making this repo.
+**Just use https://privacy.sexy/, it is better and I did not realise it had an option to disable Defender before making this repo.**
 
 
 This script allows you to disable or enable Windows Defender along with its services and drivers. You might want to disable Defender for performance reasons and to generally have a lighter system, as you don't need the services & drivers running without Defender enabled. 
